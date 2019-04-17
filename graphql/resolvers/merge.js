@@ -12,7 +12,7 @@ const getEvents = async eventIds => {
       };
     });
   } catch (err) {
-    console.log('Event not found');
+    console.log('Event not found.');
     throw err;
   }
 };
@@ -22,7 +22,7 @@ const getEvent = async eventId => {
     const res = await Event.findById(eventId);
     return { ...res._doc, id: res._id, creator: getUser.bind(this, res._doc.creator) };
   } catch (err) {
-    console.log('Event not found');
+    console.log('Event not found.');
     throw err;
   }
 };
@@ -37,7 +37,7 @@ const getUser = async userId => {
       createdEvents: getEvents.bind(this, user._doc.createdEvents)
     };
   } catch (err) {
-    console.log('User not found');
+    console.log('User not found.');
     throw err;
   }
 };

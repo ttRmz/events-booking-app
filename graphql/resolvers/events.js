@@ -12,19 +12,22 @@ module.exports = {
       throw err;
     }
   },
-  createEvent: async args => {
+  createEvent: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const event = new Event({
       title: args.EventInput.title,
       description: args.EventInput.description,
       price: args.EventInput.price,
       date: new Date(args.EventInput.date),
-      creator: '5cb719721b51bb29c2c7bdbf'
+      creator: req.userId
     });
     let createdEvent;
     try {
       const res = await event.save();
       createdEvent = formatEvent(res);
-      const creator = await User.findById('5cb719721b51bb29c2c7bdbf');
+      const creator = await User.findById(req.userId);
       if (!creator) {
         throw new Error('User not found.');
       }
@@ -32,7 +35,6 @@ module.exports = {
       await creator.save();
       return createdEvent;
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

@@ -21,6 +21,12 @@ module.exports = buildSchema(`
     createdAt: Date!
     updatedAt: Date!
   }
+  
+  type Auth {
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+  }
 
   input EventInput {
     title: String!
@@ -32,6 +38,7 @@ module.exports = buildSchema(`
   type Query {
     events: [Event!]!
     bookings: [Booking!]!
+    login(email: String!, password: String!): Auth!
   }
 
   type User {
