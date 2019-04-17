@@ -8,7 +8,7 @@ module.exports = buildSchema(`
     event: Event!
     user: User!
     createdAt: Date!
-    updtaedAt: Date!
+    updatedAt: Date!
   }
 
   type Event {
@@ -26,7 +26,7 @@ module.exports = buildSchema(`
     title: String!
     description: String!
     price: Float!
-    date: String!
+    date: Date!
   }
 
   type Query {
