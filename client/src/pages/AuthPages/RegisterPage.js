@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Auth.scss';
 import { Link } from 'react-router-dom';
-import { Button, Emoji, Tick } from '../../components';
+import { Button, Emoji, Tick, Spinner } from '../../components';
 import { Mutation } from 'react-apollo';
 import { loader } from 'graphql.macro';
 import { useInput } from 'react-hanger';
@@ -18,10 +18,9 @@ function RegisterPage() {
         </h2>
         <p>Please, create your account to join the community.</p>
         <Mutation mutation={REGISTER}>
-          {(createUser, { data }) => {
-            console.log('TCL: RegisterPage -> data', data);
+          {(createUser, { loading, data, error }) => {
             return !data ? (
-              <RegisterForm createUser={createUser} />
+              <RegisterForm createUser={createUser} loading={loading} gqlError={error} />
             ) : (
               <h3 className='registered'>
                 Hi {data.createUser.pseudo}! <Tick />
@@ -35,27 +34,50 @@ function RegisterPage() {
   );
 }
 
-function RegisterForm({ createUser }) {
+function RegisterForm({ createUser, loading, gqlError }) {
   const username = useInput('');
   const email = useInput('');
   const password = useInput('');
   const verifyPassword = useInput('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (gqlError) {
+      const newError = gqlError.graphQLErrors.map(({ message }) => message).join('');
+      setError(newError);
+    }
+  }, [gqlError]);
+
+  const handleErrors = () => {
+    if (email.value && username.value && password.value) {
+      if (!verifyPassword.value) {
+        setError('You must verify your password');
+        return true;
+      }
+      if (password.value !== verifyPassword.value) {
+        setError('The two passwords do not match');
+        return true;
+      }
+      return false;
+    } else if (!email.value || !username.value) {
+      setError(`Your ${!username.value ? 'username' : 'email address'} is required`);
+      return true;
+    }
+    setError('You must enter your password');
+    return true;
+  };
+
+  const handleRegister = evt => {
+    evt.preventDefault();
+    if (!handleErrors()) {
+      return createUser({
+        variables: { email: email.value, pseudo: username.value, password: password.value }
+      });
+    }
+  };
+
   return (
-    <form
-      className='form'
-      onSubmit={e => {
-        e.preventDefault();
-        if (email.value && username.value && password.value && verifyPassword.value) {
-          if (password.value === verifyPassword.value) {
-            return createUser({
-              variables: { email: email.value, pseudo: username.value, password: password.value }
-            });
-          }
-          return console.error('The two passwords do not match');
-        }
-        return console.error('Some fields are missing');
-      }}
-    >
+    <form className='form' onSubmit={handleRegister}>
       <div className='form__container'>
         <div className='form__control'>
           <label htmlFor='username'>Choose an username</label>
@@ -86,8 +108,11 @@ function RegisterForm({ createUser }) {
           />
         </div>
       </div>
+      {error && <span className='form__error'>{error}</span>}
       <div className='form__action'>
-        <Button type='submit'>Register</Button>
+        <Button style={{ width: 98 }} disabled={loading} type='submit'>
+          {loading ? <Spinner /> : 'Register'}
+        </Button>
       </div>
       <span className='redirect'>
         Already have an account ? <Link to='/auth'>Click here</Link> to sign in.
