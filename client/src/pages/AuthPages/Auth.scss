@@ -90,3 +90,16 @@
     margin-top: 1.2em;
   }
 }
+
+.registered {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: 300;
+  margin: 2rem 0;
+
+  svg {
+    margin-left: 0.4em;
+  }
+}
