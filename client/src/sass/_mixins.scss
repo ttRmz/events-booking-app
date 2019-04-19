@@ -1,0 +1,25 @@
+@function map-get-or-default($map, $key, $default-value) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @return $default-value;
+}
+
+
+@mixin elevation($level: 3) {
+
+  // Lists start at index 1...
+  @if $level+1>length($elevations) {
+    @error "There are only #{length($elevations)} levels of elevation, received: #{$level}";
+  }
+
+  $elevation: nth($elevations, $level + 1);
+  $offset-x: map-get-or-default($elevation, 'offset-x', 0);
+  $offset-y: map-get-or-default($elevation, 'offset-y', 0);
+  $blur-radius: map-get-or-default($elevation, 'blur-radius', 0);
+  $spread-radius: map-get-or-default($elevation, 'spread-radius', 0);
+  $color-opacity: map-get-or-default($elevation, 'color-opacity', 0);
+
+  box-shadow: #{$offset-x}px #{$offset-y}px #{$blur-radius}px #{$spread-radius}px rgba(0, 0, 0, $color-opacity);
+}

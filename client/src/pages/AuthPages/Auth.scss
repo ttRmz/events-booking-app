@@ -1,0 +1,92 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.login,
+.register {
+  position: relative;
+  min-height: calc(100vh - #{$topbar_height});
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__container {
+    width: 50%;
+    padding: 0 56px;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.6em;
+    width: 100%;
+    margin-bottom: .4rem;
+  }
+
+  p {
+    font-weight: 300;
+  }
+}
+
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.2rem;
+  margin-bottom: 2.8rem;
+
+  &__container {
+    @include elevation(1);
+  }
+
+  &__control {
+    position: relative;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid $grey;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    label {
+      font-size: .8em;
+      position: absolute;
+      top: 16px;
+      left: 20px;
+    }
+
+    input {
+      font-size: 14px;
+      padding: 16px;
+      padding-top: 32px;
+      border: none;
+      outline: none;
+      height: 78px;
+      line-height: 29px;
+      border-left: solid 4px transparent;
+
+      &:focus {
+        border-left-color: $red;
+      }
+    }
+
+
+  }
+
+  &__action {
+    margin-top: 1.2em;
+  }
+}

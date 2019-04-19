@@ -1,0 +1,47 @@
+body {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
+  background: $light;
+}
+
+html {
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  // This needs to come after -webkit-font-smoothing
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  padding: 56px 0 0 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  color: $dark;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+input {
+  font-family: 'Roboto';
+}
+
+a {
+  text-decoration: none;
+}

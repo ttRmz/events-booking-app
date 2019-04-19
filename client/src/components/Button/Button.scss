@@ -1,0 +1,45 @@
+@import '../../sass/variables';
+
+.btn {
+  cursor: pointer;
+  padding: 12px 32px;
+  outline: none;
+  border-radius: 4px;
+  font-size: .8em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition-duration: 75ms;
+  transition-property: background-color, color, border;
+  transition-timing-function: linear;
+
+  &--primary--dark {
+    border: 1px solid $dark;
+    background-color: $dark;
+    color: white;
+
+    &:hover,
+    &:focus {
+      border-color: mix($dark, white, 70%);
+      background-color: mix($dark, white, 70%);
+    }
+  }
+
+  &--secondary--dark {
+    border: 1px solid $dark;
+    background-color: transparent;
+    color: $dark;
+  }
+
+  &--primary--light {
+    border: 1px solid $light;
+    background-color: $light;
+    color: $dark;
+  }
+
+  &--secondary--light {
+    border: 1px solid $light;
+    background-color: transparent;
+    color: $light;
+  }
+
+}
