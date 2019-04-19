@@ -62,6 +62,7 @@
     }
 
     label {
+      user-select: none;
       font-size: .8em;
       position: absolute;
       top: 16px;
@@ -88,6 +89,12 @@
 
   &__action {
     margin-top: 1.2em;
+  }
+
+  &__error {
+    margin-top: 0.8em;
+    color: $red;
+    font-size: .8em;
   }
 }
 
