@@ -14,7 +14,7 @@ const userSchema = new Schema(
     pseudo: {
       required: true,
       type: String,
-      minlength: 6,
+      minlength: 3,
       maxlength: 14
     },
     createdEvents: [
