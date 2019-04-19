@@ -15,8 +15,8 @@ function LoginPage() {
         <form className='form'>
           <div className='form__container'>
             <div className='form__control'>
-              <label htmlFor='email'>Email address</label>
-              <input placeholder='email' type='email' id='email' />
+              <label htmlFor='username'>Username</label>
+              <input placeholder='username' type='text' id='username' />
             </div>
             <div className='form__control'>
               <label htmlFor='password'>Password</label>
