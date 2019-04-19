@@ -8,7 +8,14 @@ const userSchema = new Schema(
     },
     password: {
       required: true,
-      type: String
+      type: String,
+      minlength: 8
+    },
+    pseudo: {
+      required: true,
+      type: String,
+      minlength: 6,
+      maxlength: 14
     },
     createdEvents: [
       {

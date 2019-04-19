@@ -5,28 +5,33 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   createUser: async args => {
-    const verifyExist = await User.findOne({ email: args.UserInput.email });
-    if (verifyExist) {
-      throw new Error('User already exists.');
+    const verifyEmail = await User.findOne({ email: args.UserInput.email });
+    const verifyPseudo = await User.findOne({ pseudo: args.UserInput.pseudo });
+    if (verifyEmail) {
+      throw new Error('User already exists for this email address.');
+    }
+    if (verifyPseudo) {
+      throw new Error('This pseudo is already taken.');
     }
     const hashedPAssword = await bcrypt.hash(args.UserInput.password, 12);
     const user = new User({
+      pseudo: args.UserInput.pseudo,
       email: args.UserInput.email,
       password: hashedPAssword
     });
     const res = await user.save();
     return { ...res._doc, password: null, id: res._id };
   },
-  login: async ({ email, password }) => {
-    const user = await User.findOne({ email });
+  login: async ({ pseudo, password }) => {
+    const user = await User.findOne({ pseudo });
     if (!user) {
       throw new Error('User does not exist!');
     }
     const isEqual = await bcrypt.compare(password, user.password);
     if (!isEqual) {
-      throw new Error('Email or password is incorrect!');
+      throw new Error('Pseudo or password is incorrect!');
     }
-    const token = jwt.sign({ userId: user._id, email }, process.env.SECRET || 'secret', {
+    const token = jwt.sign({ userId: user._id, pseudo }, process.env.SECRET || 'secret', {
       expiresIn: '1h'
     });
     return {

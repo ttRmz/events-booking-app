@@ -5,12 +5,7 @@ const { dateToString } = require('../../helpers/date');
 const getEvents = async eventIds => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
-    return events.map(event => {
-      return {
-        ...formatEvent(event),
-        creator: getUser.bind(this, event._doc.creator)
-      };
-    });
+    return events.map(event => formatEvent(event));
   } catch (err) {
     console.log('Event not found.');
     throw err;
