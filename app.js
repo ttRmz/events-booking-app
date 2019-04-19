@@ -6,8 +6,15 @@ const mongoose = require('mongoose');
 const graphqlSchemas = require('./graphql/schemas');
 const graphqlResolvers = require('./graphql/resolvers');
 const isAuth = require('./middleware/auth');
+const cors = require('cors');
 
 const app = express();
+
+const corsOptions = {
+  origin: (origin, callback) => callback(null, true)
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(
