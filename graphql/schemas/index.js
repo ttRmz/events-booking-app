@@ -38,7 +38,6 @@ module.exports = buildSchema(`
   type Query {
     events: [Event!]!
     bookings: [Booking!]!
-    login(pseudo: String!, password: String!): Auth!
   }
 
   type User {
@@ -60,6 +59,7 @@ module.exports = buildSchema(`
   type Mutation {
     createEvent(EventInput: EventInput!): Event
     createUser(UserInput: UserInput!): User
+    login(pseudo: String!, password: String!): Auth!
     bookEvent(eventID: ID!): Booking!
     cancelBooking(bookingID: ID!): Event!
   }
