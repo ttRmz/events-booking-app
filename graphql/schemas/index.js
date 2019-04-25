@@ -23,6 +23,7 @@ module.exports = buildSchema(`
   }
   
   type Auth {
+    pseudo: String!
     userId: ID!
     token: String!
     tokenExpiration: Int!

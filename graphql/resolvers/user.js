@@ -32,6 +32,7 @@ module.exports = {
       expiresIn: '1h'
     });
     return {
+      pseudo,
       userId: user._id,
       token,
       tokenExpiration: 1
