@@ -14,7 +14,7 @@ function RegisterPage() {
     <section className='register'>
       <div className='register__container'>
         <h2>
-          Wellcome to <b>Event Booking</b> <Emoji label='hello'> 👋</Emoji>.
+          Welcome to <b>Event Booking</b> <Emoji label='hello'> 👋</Emoji>.
         </h2>
         <p>Please, create your account to join the community.</p>
         <Mutation mutation={REGISTER}>
