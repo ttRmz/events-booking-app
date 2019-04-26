@@ -30,10 +30,12 @@ export function UserProvider({ value, ...rest }) {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    setUser({ userId: null, token: null });
+    setUser({ userId: null, token: null, username: null });
   };
   const { userId, token, username } = user;
-  return <UserContext.Provider value={{username, userId, token, login: handleLogin, logout: handleLogout }} {...rest} />;
+  return (
+    <UserContext.Provider value={{ username, userId, token, login: handleLogin, logout: handleLogout }} {...rest} />
+  );
 }
 
 export default UserContext;
