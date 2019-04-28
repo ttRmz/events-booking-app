@@ -24,7 +24,7 @@ export function UserProvider({ value, ...rest }) {
   const handleStoreUser = user => {
     localStorage.setItem('userId', user.userId);
     localStorage.setItem('token', user.token);
-    localStorage.setItem('username', user.pseudo);
+    localStorage.setItem('username', user.username);
   };
   const handleLogout = () => {
     localStorage.removeItem('userId');
