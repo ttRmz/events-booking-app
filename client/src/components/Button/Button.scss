@@ -1,22 +1,78 @@
 @import '../../sass/variables';
+$btn-heigth: 36px;
 
 .btn {
   cursor: pointer;
   text-align: center;
-  padding: 12px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
   border-radius: 4px;
-  min-height: 42px;
-  max-height: 42px;
+  min-height: $btn-heigth;
+  max-height: $btn-heigth;
+  line-height: 34px;
   font-size: .8em;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition-duration: 75ms;
   transition-property: background-color, color, border;
   transition-timing-function: linear;
+
+  &--primary--green {
+    border: 1px solid $green;
+    background-color: $green;
+    color: white;
+
+    &:hover,
+    &:focus {
+      border-color: mix($green, white, 70%);
+      background-color: mix($green, white, 70%);
+    }
+  }
+
+  &--secondary--green {
+    border: 1px solid $green;
+    background-color: transparent;
+    color: $green;
+  }
+
+  &--primary--red {
+    border: 1px solid $red;
+    background-color: $red;
+    color: white;
+
+    &:hover,
+    &:focus {
+      border-color: mix($red, white, 70%);
+      background-color: mix($red, white, 70%);
+    }
+  }
+
+  &--secondary--red {
+    border: 1px solid $red;
+    background-color: transparent;
+    color: $red;
+  }
+
+  &--primary--blue {
+    border: 1px solid $blue;
+    background-color: $blue;
+    color: white;
+
+    &:hover,
+    &:focus {
+      border-color: mix($blue, white, 70%);
+      background-color: mix($blue, white, 70%);
+    }
+  }
+
+  &--secondary--blue {
+    border: 1px solid $blue;
+    background-color: transparent;
+    color: $blue;
+  }
 
   &--primary--dark {
     border: 1px solid $dark;
