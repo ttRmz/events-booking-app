@@ -60,6 +60,6 @@ const formatBooking = booking => {
 exports.formatEvent = formatEvent;
 exports.formatBooking = formatBooking;
 
-exports.getUser = getEvent;
+exports.getUser = getUser;
 exports.getEvents = getEvents;
 exports.getEvent = getEvent;

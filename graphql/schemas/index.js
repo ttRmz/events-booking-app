@@ -39,6 +39,7 @@ module.exports = buildSchema(`
   type Query {
     events: [Event!]!
     bookings: [Booking!]!
+    me: User!
   }
 
   type User {

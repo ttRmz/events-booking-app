@@ -2,8 +2,15 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
+const { getUser } = require('./merge');
 
 module.exports = {
+  me: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
+    return await getUser(req.userId);
+  },
   createUser: async args => {
     const verifyEmail = await User.findOne({ email: args.UserInput.email });
     const verifyPseudo = await User.findOne({ pseudo: args.UserInput.pseudo });
