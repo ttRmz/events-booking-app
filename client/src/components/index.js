@@ -4,3 +4,5 @@ export { default as Emoji } from './Emoji';
 export { default as Tick } from './Tick';
 export { default as Spinner } from './Spinner';
 export { default as GuardedRoute } from './GuardedRoute';
+export { default as User } from './User';
+export { default as UserMenu } from './UserMenu';

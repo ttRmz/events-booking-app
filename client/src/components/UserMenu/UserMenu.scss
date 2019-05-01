@@ -1,0 +1,50 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.user__menu {
+  @include elevation(3);
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  background-color: $white;
+  transform: translateY(100%);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+
+  &--overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  &--item {
+    cursor: pointer;
+    padding: 8px 24px;
+    white-space: nowrap;
+    margin: 0 !important;
+    border-bottom: 1px $light solid;
+    transition: background-color 75ms linear;
+
+    &:hover {
+      background-color: $light;
+    }
+
+    &:last-child {
+      border-bottom: 0px $light solid;
+
+      a {
+        color: $red;
+      }
+    }
+
+    a {
+      padding: 0;
+    }
+  }
+}

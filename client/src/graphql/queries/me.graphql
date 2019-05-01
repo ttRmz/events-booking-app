@@ -1,0 +1,13 @@
+query me {
+  me {
+    email
+    pseudo
+    id
+    createdAt
+    events: createdEvents {
+      id
+      title
+      description
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import '../../sass/variables';
+
+.user {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__infos {
+    height: 36px;
+    display: flex;
+    max-height: 36px;
+    flex-direction: column;
+    text-align: right;
+    justify-content: space-between;
+    margin-right: 1.2rem;
+
+    h3 {
+      font-weight: 500;
+      font-size: 1em;
+      color: $dark
+    }
+
+    span {
+      color: $grey;
+      font-size: .8em;
+    }
+  }
+
+  button {
+    height: 36px;
+    max-height: 36px;
+  }
+
+  img {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+  }
+}

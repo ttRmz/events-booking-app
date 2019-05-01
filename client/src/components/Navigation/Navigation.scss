@@ -3,13 +3,13 @@
 
 
 .navigation {
-  @include elevation(3);
+  @include elevation(2);
   position: fixed;
   top: 0;
   z-index: 10;
   width: 100%;
   padding: 0 48px;
-  background-color: white;
+  background-color: $white;
   display: flex;
   justify-content: space-between;
   height: $topbar_height;
@@ -33,33 +33,22 @@
     align-items: center;
 
     li {
-      margin-right: 2.8rem;
+      margin-right: 1rem;
 
       &:last-child {
         margin-right: 0;
       }
-
-      .link--active {
-        color: $blue;
-
-      }
     }
 
-    a {
+    a,
+    .btn {
       font-weight: 500;
       font-size: .8em;
-      text-transform: uppercase;
-      transition: color linear 75ms;
       position: relative;
       display: flex;
       justify-content: center;
-      line-height: $topbar_height;
-
-      &:hover {
-        color: $blue;
-      }
-
-
+      padding: 0px 26px;
     }
   }
+
 }
