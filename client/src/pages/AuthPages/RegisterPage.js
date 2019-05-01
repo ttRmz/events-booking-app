@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState, useEffect } from 'react';
 import './Auth.scss';
@@ -29,7 +30,7 @@ function RegisterPage() {
           }}
         </Mutation>
       </div>
-      <div className='register__container register__img' style={{ backgroundImage: 'url(./assets/images/sky.jpg)' }} />
+      <div className='register__container register__img' style={{ backgroundImage: 'url(./assets/images/club.jpg)' }} />
     </section>
   );
 }
@@ -76,20 +77,40 @@ function RegisterForm({ createUser, loading, gqlError }) {
     }
   };
 
+  const validateEmail = email => {
+    const REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return REGEX.test(String(email).toLowerCase());
+  };
+
   return (
     <form className='form' onSubmit={handleRegister}>
       <div className='form__container'>
         <div className='form__control'>
           <label htmlFor='username'>Choose an username</label>
-          <input placeholder='username' value={username.value} onChange={username.onChange} type='text' id='username' />
+          <input
+            className={username.value.length > 2 ? 'validated' : ''}
+            placeholder='username'
+            value={username.value}
+            onChange={username.onChange}
+            type='text'
+            id='username'
+          />
         </div>
         <div className='form__control'>
           <label htmlFor='email'>Email address</label>
-          <input placeholder='email' type='email' id='email' value={email.value} onChange={email.onChange} />
+          <input
+            className={validateEmail(email.value) ? 'validated' : ''}
+            placeholder='email'
+            type='email'
+            id='email'
+            value={email.value}
+            onChange={email.onChange}
+          />
         </div>
         <div className='form__control'>
           <label htmlFor='password'>Password</label>
           <input
+            className={password.value.length > 5 ? 'validated' : ''}
             placeholder='password'
             type='password'
             id='password'
@@ -100,6 +121,7 @@ function RegisterForm({ createUser, loading, gqlError }) {
         <div className='form__control'>
           <label htmlFor='verify-password'>Verify your assword</label>
           <input
+            className={password.value && password.value === verifyPassword.value ? 'validated' : ''}
             placeholder='verify password'
             type='password'
             id='verify-password'
@@ -110,12 +132,12 @@ function RegisterForm({ createUser, loading, gqlError }) {
       </div>
       {error && <span className='form__error'>{error}</span>}
       <div className='form__action'>
-        <Button style={{ width: 98 }} disabled={loading} type='submit'>
-          {loading ? <Spinner /> : 'Register'}
+        <Button color={'green'} style={{ width: 98 }} disabled={loading} type='submit'>
+          {loading ? <Spinner light /> : 'Register'}
         </Button>
       </div>
       <span className='redirect'>
-        Already have an account ? <Link to='/auth'>Click here</Link> to sign in.
+        Already have an account ? <Link to='/login'>Click here</Link> to sign in.
       </span>
     </form>
   );

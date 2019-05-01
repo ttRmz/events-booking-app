@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 function LogoutPage() {
   useContext(userContext).logout();
-  return <Redirect to='/auth' />;
+  return <Redirect to='/login' />;
 }
 
 export default LogoutPage;

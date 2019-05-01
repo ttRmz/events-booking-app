@@ -30,7 +30,7 @@ function LoginPage() {
           }}
         </Mutation>
       </div>
-      <div className='login__container login__img' style={{ backgroundImage: 'url(./assets/images/colors.jpg)' }} />
+      <div className='login__container login__img' style={{ backgroundImage: 'url(./assets/images/conf.jpg)' }} />
     </section>
   );
 }
@@ -87,8 +87,8 @@ function LoginForm({ login, loading, gqlError }) {
       </div>
       {error && <span className='form__error'>{error}</span>}
       <div className='form__action'>
-        <Button style={{ width: 98 }} disabled={loading} type='submit'>
-          {loading ? <Spinner /> : 'Login'}
+        <Button color={'green'} style={{ width: 98 }} disabled={loading} type='submit'>
+          {loading ? <Spinner light /> : 'Login'}
         </Button>
       </div>
       <span className='redirect'>
