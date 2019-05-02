@@ -1,0 +1,49 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.input {
+  position: relative;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid $light;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &__label {
+    user-select: none;
+    font-size: .8em;
+    position: absolute;
+    top: 16px;
+    left: 20px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 16px;
+    padding-top: 32px;
+    border: none;
+    outline: none;
+    height: 78px;
+    line-height: 29px;
+    border-left: solid 4px transparent;
+
+    &:focus {
+      border-left-color: $red;
+    }
+
+  }
+
+  &--validated input:focus {
+    border-left-color: $green;
+
+  }
+
+
+  &--container {
+    @include elevation(1);
+  }
+}

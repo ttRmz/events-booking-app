@@ -6,3 +6,4 @@ export { default as Spinner } from './Spinner';
 export { default as GuardedRoute } from './GuardedRoute';
 export { default as User } from './User';
 export { default as UserMenu } from './UserMenu';
+export { default as Input } from './Input';

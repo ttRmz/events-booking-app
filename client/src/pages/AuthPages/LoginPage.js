@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.scss';
-import { Button, Emoji, Spinner } from '../../components';
+import { Button, Emoji, Spinner, Input } from '../../components';
 import { Mutation } from 'react-apollo';
 import { loader } from 'graphql.macro';
 import { useInput } from 'react-hanger';
@@ -69,22 +69,24 @@ function LoginForm({ login, loading, gqlError }) {
 
   return (
     <form className='form' onSubmit={handleLogin}>
-      <div className='form__container'>
-        <div className='form__control'>
-          <label htmlFor='username'>Username</label>
-          <input value={username.value} onChange={username.onChange} placeholder='username' type='text' id='username' />
-        </div>
-        <div className='form__control'>
-          <label htmlFor='password'>Password</label>
-          <input
-            value={password.value}
-            onChange={password.onChange}
-            placeholder='password'
-            type='password'
-            id='password'
-          />
-        </div>
-      </div>
+      <Input.Container>
+        <Input
+          label='Username'
+          value={username.value}
+          onChange={username.onChange}
+          placeholder='username'
+          type='text'
+          id='username'
+        />
+        <Input
+          label='Password'
+          value={password.value}
+          onChange={password.onChange}
+          placeholder='password'
+          type='password'
+          id='password'
+        />
+      </Input.Container>
       {error && <span className='form__error'>{error}</span>}
       <div className='form__action'>
         <Button color={'green'} style={{ width: 98 }} disabled={loading} type='submit'>

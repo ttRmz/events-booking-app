@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './Auth.scss';
 import { Link } from 'react-router-dom';
-import { Button, Emoji, Tick, Spinner } from '../../components';
+import { Button, Emoji, Tick, Spinner, Input } from '../../components';
 import { Mutation } from 'react-apollo';
 import { loader } from 'graphql.macro';
 import { useInput } from 'react-hanger';
@@ -84,52 +84,44 @@ function RegisterForm({ createUser, loading, gqlError }) {
 
   return (
     <form className='form' onSubmit={handleRegister}>
-      <div className='form__container'>
-        <div className='form__control'>
-          <label htmlFor='username'>Choose an username</label>
-          <input
-            className={username.value.length > 2 ? 'validated' : ''}
-            placeholder='username'
-            value={username.value}
-            onChange={username.onChange}
-            type='text'
-            id='username'
-          />
-        </div>
-        <div className='form__control'>
-          <label htmlFor='email'>Email address</label>
-          <input
-            className={validateEmail(email.value) ? 'validated' : ''}
-            placeholder='email'
-            type='email'
-            id='email'
-            value={email.value}
-            onChange={email.onChange}
-          />
-        </div>
-        <div className='form__control'>
-          <label htmlFor='password'>Password</label>
-          <input
-            className={password.value.length > 5 ? 'validated' : ''}
-            placeholder='password'
-            type='password'
-            id='password'
-            value={password.value}
-            onChange={password.onChange}
-          />
-        </div>
-        <div className='form__control'>
-          <label htmlFor='verify-password'>Verify your assword</label>
-          <input
-            className={password.value && password.value === verifyPassword.value ? 'validated' : ''}
-            placeholder='verify password'
-            type='password'
-            id='verify-password'
-            value={verifyPassword.value}
-            onChange={verifyPassword.onChange}
-          />
-        </div>
-      </div>
+      <Input.Container>
+        <Input
+          label='Choose an username'
+          validated={username.value.length > 2}
+          placeholder='username'
+          value={username.value}
+          onChange={username.onChange}
+          type='text'
+          id='username'
+        />
+        <Input
+          label='Email address'
+          validated={validateEmail(email.value)}
+          placeholder='email'
+          type='email'
+          id='email'
+          value={email.value}
+          onChange={email.onChange}
+        />
+        <Input
+          label='Password'
+          validated={password.value.length > 5}
+          placeholder='password'
+          type='password'
+          id='password'
+          value={password.value}
+          onChange={password.onChange}
+        />
+        <Input
+          label='Verify your assword'
+          validated={password.value && password.value === verifyPassword.value}
+          placeholder='verify password'
+          type='password'
+          id='verify-password'
+          value={verifyPassword.value}
+          onChange={verifyPassword.onChange}
+        />
+      </Input.Container>
       {error && <span className='form__error'>{error}</span>}
       <div className='form__action'>
         <Button color={'green'} style={{ width: 98 }} disabled={loading} type='submit'>

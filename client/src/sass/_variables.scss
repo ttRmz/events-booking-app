@@ -9,31 +9,3 @@ $background:#FEFEFE;
 $white: #fff;
 
 $topbar_height: 56px;
-
-$elevations: ((
-/* Use default values. */
-),
-(offset-y: 0,
-blur-radius: 2,
-color-opacity: 0.16,
-),
-(offset-y: 1,
-blur-radius: 6,
-color-opacity: 0.1,
-),
-(offset-y: 2,
-blur-radius: 6,
-color-opacity: 0.23,
-),
-(offset-y: 4,
-blur-radius: 9,
-color-opacity: 0.26,
-),
-(offset-y: 6,
-blur-radius: 12,
-color-opacity: 0.29,
-),
-(offset-y: 8,
-blur-radius: 15,
-color-opacity: 0.3,
-));
