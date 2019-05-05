@@ -20,6 +20,10 @@ $btn-heigth: 36px;
   transition-property: background-color, color, border;
   transition-timing-function: linear;
 
+  &--active {
+    opacity: .7;
+  }
+
   &--primary--green {
     border: 1px solid $green;
     background-color: $green;
