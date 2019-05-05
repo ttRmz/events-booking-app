@@ -16,26 +16,17 @@ export function UserProvider({ value, ...rest }) {
   const usr = localStorage.getItem('username');
   const [user, setUser] = useState({ userId: null, token: null, username: null, avatar: null });
   const getAvatar = id => `https://api.adorable.io/avatars/64/${id}`;
-  useEffect(() => {
-    if (!tk && user.token) {
-      handleStoreUser(user);
-    }
-  }, [user]);
-  useEffect(() => {
-    if (tk && !user.token) {
-      setUser({ userId: id, token: tk, username: usr, avatar: getAvatar(id) });
-    }
-  }, []);
   const handleLogin = ({ login }) => {
     const { userId, token, pseudo } = login;
     return setUser({ userId, token, username: pseudo, avatar: getAvatar(userId) });
   };
-  const handleStoreUser = user => {
-    localStorage.setItem('userId', user.userId);
-    localStorage.setItem('token', user.token);
-    localStorage.setItem('username', user.username);
-    location.reload();
-  };
+  useEffect(() => {
+    if (!tk && user.token) {
+      localStorage.setItem('userId', user.userId);
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('username', user.username);
+    } else if (tk && !user.token) setUser({ userId: id, token: tk, username: usr, avatar: getAvatar(id) });
+  }, [user, localStorage]);
   const handleLogout = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
