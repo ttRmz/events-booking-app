@@ -1,0 +1,74 @@
+@import '../../sass/variables';
+
+.toggle {
+
+  &,
+  & * {
+    cursor: pointer;
+  }
+
+  position: relative;
+  height: 26px;
+  width: 44px;
+  display: inline-block;
+  z-index: 1;
+
+  &__input {
+    opacity: 0;
+    width: 40px;
+    height: 20px;
+
+    &:checked+.toggle__label:before {
+      background-color: mix($green, transparent, 50%);
+    }
+
+    &:checked+.toggle__label:after {
+      background-color: $green;
+      transform: translate(19px, -50%);
+    }
+
+    &:checked+.toggle__label:after,
+    &:checked+.toggle__label:before {
+      transition: all 75ms ease-in-out;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    left: 4px;
+    top: 13px;
+    z-index: -1;
+
+    &:before,
+    &:after {
+      left: 0;
+      content: '';
+      position: absolute;
+      margin: 0;
+      outline: 0;
+      top: 50%;
+      transition: all 75ms ease-in-out;
+    }
+
+    &:before {
+      width: 36px;
+      height: 14px;
+      background-color: mix($grey,
+          $white,
+          70%);
+      border-radius: 8px;
+      transform: translate(0, -50%);
+    }
+
+    &:after {
+      transform: translate(-3px, -50%);
+      width: 20px;
+      height: 20px;
+      background-color: mix($grey,
+          $white,
+          20%);
+      border-radius: 50%;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.12);
+    }
+  }
+}
