@@ -5,6 +5,7 @@ import { Emoji, Spinner, UserMenu } from '../index';
 import userContext from '../../context/userContext';
 import { loader } from 'graphql.macro';
 import { useBoolean } from 'react-hanger';
+import { Redirect } from 'react-router-dom';
 import './User.scss';
 
 const ME = loader('../../graphql/queries/me.graphql');
@@ -14,7 +15,9 @@ function User() {
   const menu = useBoolean(false);
   return (
     <Query query={ME}>
-      {({ data }) => {
+      {({ loading, data, error }) => {
+        if (loading) return <Spinner />;
+        if (error) return <Redirect to='/logout' />;
         if (data && data.me)
           return (
             <div className='user'>
@@ -31,7 +34,6 @@ function User() {
               {menu.value && <UserMenu onClose={menu.toggle} />}
             </div>
           );
-        return <Spinner />;
       }}
     </Query>
   );
