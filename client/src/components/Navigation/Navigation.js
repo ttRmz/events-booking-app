@@ -5,7 +5,7 @@ import './Navigation.scss';
 import { Emoji, Button, User } from '../index';
 import userContext from '../../context/userContext';
 
-function Navigation() {
+function Navigation({ create }) {
   const { token } = useContext(userContext);
   return (
     <header className='navigation'>
@@ -32,7 +32,9 @@ function Navigation() {
         {token && (
           <Fragment>
             <li>
-              <Button color='green'>CREATE NEW</Button>
+              <Button onClick={create.toggle} active={!!create.value} color='green'>
+                CREATE NEW
+              </Button>
             </li>
             <li>
               <User />

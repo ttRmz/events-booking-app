@@ -8,3 +8,4 @@ export { default as User } from './User';
 export { default as UserMenu } from './UserMenu';
 export { default as Input } from './Input';
 export { default as Toggle } from './Toggle';
+export { default as CreateEvent } from './CreateEvent';

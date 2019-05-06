@@ -31,6 +31,11 @@
     line-height: 29px;
     border-left: solid 4px transparent;
 
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
     &:focus {
       border-left-color: $red;
     }
