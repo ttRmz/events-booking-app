@@ -16,7 +16,8 @@ module.exports = buildSchema(`
     title: String!
     description: String!
     price: Float!
-    date: String!
+    date: Date!
+    time: String!
     creator: User!
     createdAt: Date!
     updatedAt: Date!
@@ -34,6 +35,7 @@ module.exports = buildSchema(`
     description: String!
     price: Float!
     date: Date!
+    time: String!
   }
 
   type Query {

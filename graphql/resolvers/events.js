@@ -21,6 +21,7 @@ module.exports = {
       description: args.EventInput.description,
       price: args.EventInput.price,
       date: new Date(args.EventInput.date),
+      time: args.EventInput.time,
       creator: req.userId
     });
     let createdEvent;
