@@ -25,11 +25,14 @@
 
   &--item {
     cursor: pointer;
-    padding: 8px 24px;
     white-space: nowrap;
     margin: 0 !important;
     border-bottom: 1px $light solid;
     transition: background-color 75ms linear;
+
+    a {
+      padding: 8px 24px !important;
+    }
 
     &:hover {
       background-color: $light;
