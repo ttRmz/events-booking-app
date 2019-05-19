@@ -86,7 +86,8 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
           date: new Date(date.value),
           time: time.value,
           price: Number(price.value)
-        }
+        },
+        refetchQueries: ['me', 'events']
       });
     }
   };
