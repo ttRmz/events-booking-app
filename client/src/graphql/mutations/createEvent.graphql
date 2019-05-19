@@ -1,5 +1,5 @@
-mutation createEvent($title: String!, $description: String!, $price: Float!, $date: Date!) {
-  createEvent(EventInput: { title: $title, description: $description, price: $price, date: $date }) {
+mutation createEvent($title: String!, $description: String!, $price: Float!, $date: Date!, $time: String!) {
+  createEvent(EventInput: { title: $title, description: $description, price: $price, date: $date, time: $time }) {
     title
   }
 }
