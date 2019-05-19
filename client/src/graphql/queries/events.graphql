@@ -1,0 +1,14 @@
+query events {
+  events {
+    id
+    title
+    description
+    price
+    date
+    time
+    creator: creator {
+      pseudo
+      id
+    }
+  }
+}

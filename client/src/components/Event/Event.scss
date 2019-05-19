@@ -1,0 +1,64 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.event {
+  @include elevation(1);
+  padding: 12px;
+  display: flex;
+  font-size: 14px;
+
+  &__date {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    margin-right: 12px;
+
+    &--day {
+      color: $red;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    &--month {
+      text-transform: uppercase;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+
+  &__infos {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  &__time {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  &__price {
+    color: $white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    padding: 4px 16px;
+    border-radius: 4px;
+
+    &--paid {
+      background-color: $blue;
+    }
+
+    &--free {
+      background-color: $green;
+    }
+  }
+}
