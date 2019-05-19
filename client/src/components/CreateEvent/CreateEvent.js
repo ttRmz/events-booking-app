@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import { Button, Toggle, Spinner, Input } from '../../components';
 import { Mutation } from 'react-apollo';
 import { loader } from 'graphql.macro';
@@ -6,18 +6,22 @@ import { useInput, useBoolean } from 'react-hanger';
 import './CreateEvent.scss';
 
 const CREATE_EVENT = loader('../../graphql/mutations/createEvent.graphql');
+const CURRENT_YEAR = new Date().getFullYear();
 
 function CreateEvent({ onClose, onSubmit, ...rest }) {
   return (
-    <div onAnimationEnd={onClose} className='create' {...rest}>
-      <h2 className='create__title'>Create new event</h2>
-      <Mutation mutation={CREATE_EVENT}>
-        {(createEvent, { loading, data, error }) => {
-          if (data) onClose();
-          return <CreateForm createEvent={createEvent} loading={loading} gqlError={error} onClose={onClose} />;
-        }}
-      </Mutation>
-    </div>
+    <Fragment>
+      <div className='create__overlay' onClick={onClose} />
+      <div className='create' {...rest}>
+        <h2 className='create__title'>Create new event</h2>
+        <Mutation mutation={CREATE_EVENT}>
+          {(createEvent, { loading, data, error }) => {
+            if (data) onClose();
+            return <CreateForm createEvent={createEvent} loading={loading} gqlError={error} onClose={onClose} />;
+          }}
+        </Mutation>
+      </div>
+    </Fragment>
   );
 }
 
@@ -26,6 +30,7 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
   const description = useInput('');
   const date = useInput('');
   const price = useInput('0');
+  const time = useInput('');
   const [error, setError] = useState('');
   const paid = useBoolean(true);
 
@@ -42,8 +47,9 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
     }
   }, [paid.value]);
 
-  const isValidDate = React.useMemo(() => Date.parse(date.value), [date.value]);
-  const isValidPrice = React.useMemo(() => Number(price.value) > 0, [price.value]);
+  const isValidDate = useMemo(() => Date.parse(date.value), [date.value]);
+  const isValidPrice = useMemo(() => Number(price.value) > 0, [price.value]);
+  const isValideTime = useMemo(() => /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(time.value));
 
   const handleVerifyErrors = () => {
     let err = false;
@@ -52,7 +58,11 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
       err = true;
     }
     if (!isValidDate) {
-      setError('You must set a date for your event.');
+      setError('You must set a valid date for your event.');
+      err = true;
+    }
+    if (!isValideTime) {
+      setError('You must set a valid time for your event.');
       err = true;
     }
     if (!description.value) {
@@ -65,6 +75,7 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
     }
     return err;
   };
+
   const handleSubmit = evt => {
     evt.preventDefault();
     if (!handleVerifyErrors()) {
@@ -73,6 +84,7 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
           title: title.value,
           description: description.value,
           date: new Date(date.value),
+          time: time.value,
           price: Number(price.value)
         }
       });
@@ -108,8 +120,21 @@ function CreateForm({ createEvent, gqlError, loading, onClose }) {
           onChange={date.onChange}
           label='Date'
           type='date'
+          min={`${CURRENT_YEAR}-01-01`}
+          max={`${CURRENT_YEAR + 1}-12-31`}
           placeholder='decription'
           id='create-date'
+        />
+        <Input
+          validated={isValideTime}
+          value={time.value}
+          onChange={time.onChange}
+          label='Time'
+          type='time'
+          min={`${CURRENT_YEAR}-01-01`}
+          max={`${CURRENT_YEAR + 1}-12-31`}
+          placeholder='time (let empty for full day)'
+          id='create-time'
         />
         <Input
           disabled={!paid.value}
