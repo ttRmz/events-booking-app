@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React, { createContext, useState, useEffect } from 'react';
+import { useAvatar } from '../core/useAvatar';
 
 const userContext = createContext({
   login: () => {},
@@ -15,17 +16,16 @@ export function UserProvider({ value, ...rest }) {
   const tk = localStorage.getItem('token');
   const usr = localStorage.getItem('username');
   const [user, setUser] = useState({ userId: null, token: null, username: null, avatar: null });
-  const getAvatar = id => `https://api.adorable.io/avatars/64/${id}`;
   const handleLogin = ({ login }) => {
     const { userId, token, pseudo } = login;
-    return setUser({ userId, token, username: pseudo, avatar: getAvatar(userId) });
+    return setUser({ userId, token, username: pseudo, avatar: useAvatar(userId) });
   };
   useEffect(() => {
     if (!tk && user.token) {
       localStorage.setItem('userId', user.userId);
       localStorage.setItem('token', user.token);
       localStorage.setItem('username', user.username);
-    } else if (tk && !user.token) setUser({ userId: id, token: tk, username: usr, avatar: getAvatar(id) });
+    } else if (tk && !user.token) setUser({ userId: id, token: tk, username: usr, avatar: useAvatar(id) });
   }, [user, localStorage]);
   const handleLogout = () => {
     localStorage.removeItem('userId');
@@ -36,7 +36,7 @@ export function UserProvider({ value, ...rest }) {
   const { userId, token, username } = user;
   return (
     <userContext.Provider
-      value={{ username, userId, token, login: handleLogin, logout: handleLogout, avatar: getAvatar(userId) }}
+      value={{ username, userId, token, login: handleLogin, logout: handleLogout, avatar: useAvatar(userId) }}
       {...rest}
     />
   );

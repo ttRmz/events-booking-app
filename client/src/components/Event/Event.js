@@ -2,6 +2,7 @@ import React from 'react';
 import './Event.scss';
 import moment from 'moment';
 import classNames from 'classnames';
+import { useAvatar } from '../../core/useAvatar';
 
 function Event({ price, date, title, time, description, creator }) {
   const [, day] = moment(date)
@@ -48,7 +49,10 @@ function Event({ price, date, title, time, description, creator }) {
         </div>
         <p className='event__time'>{time.replace(':', 'h').replace('h00', 'h')}</p>
         <p className='event__description'>{description}</p>
-        <p className='event__creator'>Created by {creator.pseudo}</p>
+        <p className='event__creator'>
+          Created by {creator.pseudo}{' '}
+          <img className='event__creator--avatar' src={useAvatar(creator.id)} alt='creatir' />
+        </p>
       </div>
     </div>
   );
