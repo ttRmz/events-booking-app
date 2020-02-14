@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
   scalar Date
@@ -39,6 +39,7 @@ module.exports = buildSchema(`
   }
 
   type Query {
+    event(id: ID!): Event
     events: [Event!]!
     bookings: [Booking!]!
     me: User!
@@ -47,7 +48,6 @@ module.exports = buildSchema(`
   type User {
     id: ID!
     email: String!
-    password: String
     pseudo: String!
     createdEvents: [Event!]
     createdAt: Date!
