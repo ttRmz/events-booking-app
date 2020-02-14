@@ -62,6 +62,7 @@ module.exports = buildSchema(`
 
   type Mutation {
     createEvent(EventInput: EventInput!): Event
+    removeEvent(id: ID!): Event!
     createUser(UserInput: UserInput!): User
     login(pseudo: String!, password: String!): Auth!
     bookEvent(eventID: ID!): Booking!
