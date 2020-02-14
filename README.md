@@ -42,11 +42,11 @@ npm run start
 - [x] Link Mongodb to API
 - [x] Create GraphQL first resolvers
 - [x] Login / Resgister
+- [x] Cancel Booking
+- [x] Remove Event
 - [ ] Add location into event schema
 - [ ] Form checking
 - [ ] Update Event
-- [ ] Remove Event
-- [ ] Cancel Booking
 - [ ] Remove account
 - [ ] User informations modification
 
