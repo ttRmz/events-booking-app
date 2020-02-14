@@ -7,6 +7,7 @@ const graphqlSchemas = require("./graphql/schemas");
 const graphqlResolvers = require("./graphql/resolvers");
 const isAuth = require("./middleware/auth");
 const cors = require("cors");
+const expressPlayground = require("graphql-playground-middleware-express");
 
 const app = express();
 
@@ -41,3 +42,5 @@ app.use(
     graphiql: true
   })
 );
+
+app.get("/playground", expressPlayground.default({ endpoint: "/graphql" }));
